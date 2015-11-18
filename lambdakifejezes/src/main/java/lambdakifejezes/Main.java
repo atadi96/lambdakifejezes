@@ -1,5 +1,6 @@
 package lambdakifejezes;
 
+import java.net.MalformedURLException;
 import java.io.IOException;
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
@@ -15,7 +16,15 @@ import eu.loxon.centralcontrol.StartGameResponse;
 
 public class Main {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, InterruptedException, MalformedURLException {
+		
+		//hogyan is lehet használni
+		Game myGame = new Game(new URL("http://javachallenge.loxon.hu:8443/engine/CentralControl?wsdl"), "lambdakifejezes", "AUPI4847");
+		myGame.start();
+		Thread.sleep(10000);	//lets 10 seconds to run the game
+		myGame.quitGame();
+		//módosítás vége: Balázs
+		
 		System.out.println("Hello world!");
 		//System.out.println(args[0]);
 		
