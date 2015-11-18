@@ -2,7 +2,6 @@ package lambdakifejezes.Polling;
 
 import eu.loxon.centralcontrol.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import eu.loxon.centralcontrol.IsMyTurnResponse;
