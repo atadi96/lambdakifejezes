@@ -1,9 +1,7 @@
 package lambdakifejezes;
 
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.io.IOException;
-
 import java.net.Authenticator;
 import java.net.PasswordAuthentication;
 import java.net.URL;
