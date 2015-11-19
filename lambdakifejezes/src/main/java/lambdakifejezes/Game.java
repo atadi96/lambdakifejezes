@@ -78,19 +78,15 @@ public class Game implements IsMyTurnListener {
 	
 
 	@Override
-	public void onOurTurnStarted(IsMyTurnResponse response, IsMyTurnWatcher sender) {
+	public void onOurTurnStarted(IsMyTurnResponse response, Date time) {
 		//TODO onOurTurnStarted
 		System.out.println("Remaining turns: " + response.getResult().getTurnsLeft() + "; Our turn started at: " + dateFormat.format(new Date()));
-		
-		//CUSTOM LOGIC (bullshit)
-		WatchRequest req = new WatchRequest();
-		req.setUnit(response.getResult().getBuilderUnit());
-		
+		//Date startintTime = sender.getLastMyTurnStartingTime(); //to make sure that you cannot send order to the server after 2,5 sec
 	}
 
 	@Override
-	public void onGameEnded(IsMyTurnResponse response, IsMyTurnWatcher sender) {
+	public void onGameEnded(IsMyTurnResponse response, Date time) {
 		//TODO onGameEnded
-		System.out.println("The game ended at: " + dateFormat.format(new Date()));
+		System.out.println("The game ended at: " + dateFormat.format(time));
 	}
 }

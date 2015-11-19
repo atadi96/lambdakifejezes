@@ -42,15 +42,15 @@ public class IsMyTurnWatcher extends Thread{
 			public void run() {
 		        // Notify everybody that may be interested.
 		        for (IsMyTurnListener l : listeners)
-		            l.onOurTurnStarted(response, getInstance());
+		            l.onOurTurnStarted(response, lastMyTurnStartingTime);
 			}  
 		}).start();
     }
 	
 	public void notifyAllListenersGameEnded(final IsMyTurnResponse response) {
-		// Notify everybody that may be interested on the current thread, becouse we dont need to poll th server anymore.
+		// Notify everybody that may be interested on the current thread, becouse we dont need to poll the server anymore.
         for (IsMyTurnListener l : listeners)
-            l.onGameEnded(response, this);
+            l.onGameEnded(response, lastMyTurnStartingTime);
     }
 	
 	public void exit()
