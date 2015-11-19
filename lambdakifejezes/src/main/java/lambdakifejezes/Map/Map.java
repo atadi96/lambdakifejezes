@@ -10,9 +10,9 @@ public class Map {
 	{
 		this.sizeX = size.getX();
 		this.sizeY = size.getY();
-		this.map = new MapField[sizeX][sizeY];
+		this.map = new Cell[sizeX][sizeY];
 	}
-	private MapField[][] map;
+	private Cell[][] map;
 	private int sizeX, sizeY;
 	private WsCoordinate hqLocation, hqExitLocation;
 
@@ -35,7 +35,7 @@ public class Map {
 	}
 	
 	//starting from zero
-	public MapField getMapField(int xIndex, int yIndex) throws Exception
+	public Cell getMapField(int xIndex, int yIndex) throws Exception
 	{
 		if (xIndex < 0 || xIndex >= sizeX)
 			throw new Exception("xIndex parameter is out of range.");
@@ -50,7 +50,7 @@ public class Map {
 		{
 			//if we add a new map field
 			if (map[s.getCord().getX()][s.getCord().getY()] == null)
-				map[s.getCord().getX()][s.getCord().getY()] = new MapField(s.getObject(), s.getTeam());
+				map[s.getCord().getX()][s.getCord().getY()] = new Cell(s.getObject(), s.getTeam());
 			else
 			{
 				//if we update an existing map field

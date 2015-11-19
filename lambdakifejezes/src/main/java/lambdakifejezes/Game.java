@@ -4,6 +4,7 @@ import java.net.Authenticator;
 import java.net.PasswordAuthentication;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,18 +13,21 @@ import eu.loxon.centralcontrol.CentralControlServiceService;
 import eu.loxon.centralcontrol.CommonResp;
 import eu.loxon.centralcontrol.IsMyTurnResponse;
 import eu.loxon.centralcontrol.StartGameResponse;
+import eu.loxon.centralcontrol.WatchRequest;
 import eu.loxon.centralcontrol.WsBuilderunit;
 import lambdakifejezes.Polling.IsMyTurnListener;
 import lambdakifejezes.Polling.IsMyTurnWatcher;
+import lambdakifejezes.Connection.ConnectionManager;
 import lambdakifejezes.Map.Map;
 
 public class Game implements IsMyTurnListener {
 	private CentralControl centralControl;
+	private ConnectionManager connectionManager;
 	private URL wsdlUrl;
 	private String username, password;
 	private IsMyTurnWatcher isMyTurnWatcher;
 	private Map map;
-	private List<WsBuilderunit> builderunits;
+	private List<BuilderUnit> builderunits;
 	private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.M.dd. hh:mm:ss,S");;
 	
 	public Game(URL url, String username, String password)
@@ -64,25 +68,28 @@ public class Game implements IsMyTurnListener {
 		//TODO handleGameStart: update map, etc...
 		System.out.println("Game started at: " + dateFormat.format(new Date()));
 		
+		connectionManager = new ConnectionManager(centralControl);
 		map = new Map(response.getSize());
-		builderunits = response.getUnits();
-		handleCommonResponse(response.getResult());
-	}
-	
-	private void handleCommonResponse(CommonResp resp)
-	{
-		//TODO think about how to solve Request / respone messaging, implement the solution (preferred in other class)
+		builderunits = new ArrayList<BuilderUnit>();
+		
+		for(WsBuilderunit unit : response.getUnits())
+			builderunits.add(new BuilderUnit(unit));
 	}
 	
 
 	@Override
-	public void onOurTurnStarted(IsMyTurnResponse response) {
+	public void onOurTurnStarted(IsMyTurnResponse response, IsMyTurnWatcher sender) {
 		//TODO onOurTurnStarted
-		System.out.println("Our turn started at: " + dateFormat.format(new Date()));
+		System.out.println("Remaining turns: " + response.getResult().getTurnsLeft() + "; Our turn started at: " + dateFormat.format(new Date()));
+		
+		//CUSTOM LOGIC (bullshit)
+		WatchRequest req = new WatchRequest();
+		req.setUnit(response.getResult().getBuilderUnit());
+		
 	}
 
 	@Override
-	public void onGameEnded(IsMyTurnResponse response) {
+	public void onGameEnded(IsMyTurnResponse response, IsMyTurnWatcher sender) {
 		//TODO onGameEnded
 		System.out.println("The game ended at: " + dateFormat.format(new Date()));
 	}

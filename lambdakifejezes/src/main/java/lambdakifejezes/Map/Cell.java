@@ -2,8 +2,8 @@ package lambdakifejezes.Map;
 
 import eu.loxon.centralcontrol.ObjectType;
 
-public class MapField {
-	public MapField(ObjectType type, String team)
+public class Cell {
+	public Cell(ObjectType type, String team)
 	{
 		this.type = type;
 		this.team = team;
