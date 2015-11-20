@@ -1,6 +1,8 @@
 package lambdakifejezes.Polling;
 
 import eu.loxon.centralcontrol.*;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -66,6 +68,8 @@ public class IsMyTurnWatcher extends Thread{
 		{
 			resp = centralControl.isMyTurn(null);
 			lastMyTurnStartingTime = new Date();
+			
+			//System.out.println("isMyTurn? "  + resp.isIsYourTurn() + " turnsLeft: " + resp.getResult().getTurnsLeft() + " builderUnit: " + resp.getResult().getBuilderUnit() + " time: " + new SimpleDateFormat("yyyy.M.dd. hh:mm:ss,S").format(lastMyTurnStartingTime));
 			
 			//if we turn
 			if (resp.isIsYourTurn() && lastBuilderUnit != resp.getResult().getBuilderUnit())

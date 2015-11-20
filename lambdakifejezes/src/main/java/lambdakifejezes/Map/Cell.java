@@ -29,4 +29,23 @@ public class Cell {
 	{
 		this.team = team;
 	}
+	
+	public String toString()
+	{
+		switch (type)
+		{
+		case BUILDER_UNIT:
+			return "U";
+		case GRANITE:
+			return "G";
+		case OBSIDIAN:
+			return "O";
+		case ROCK:
+			return "R";
+		case SHUTTLE:
+			return "S";
+		default:
+			return "T";
+		}
+	}
 }

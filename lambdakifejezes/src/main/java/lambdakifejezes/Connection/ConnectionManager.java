@@ -39,7 +39,7 @@ public class ConnectionManager implements ResponseCodeListener{
 	{
 		GetSpaceShuttlePosResponse resp = centralControl.getSpaceShuttlePos(req);
 		
-		if (resp.getResult().getCode().equals(ResultType.DONE))
+		if (resp.getResult().getType().equals(ResultType.DONE))
 			this.hasGetSpaceShuttlePosition = true;
 		
 		return resp;
@@ -53,7 +53,7 @@ public class ConnectionManager implements ResponseCodeListener{
 	{
 		GetSpaceShuttleExitPosResponse resp = centralControl.getSpaceShuttleExitPos(req);
 		
-		if (resp.getResult().getCode().equals(ResultType.DONE))
+		if (resp.getResult().getType().equals(ResultType.DONE))
 			this.hasGetSpaceShuttleExitPosition = true;
 		
 		return resp;
@@ -99,7 +99,7 @@ public class ConnectionManager implements ResponseCodeListener{
 	{
 		StartGameResponse resp = centralControl.startGame(req);
 		
-		if (resp.getResult().getCode().equals(ResultType.DONE))
+		if (resp.getResult().getType().equals(ResultType.DONE))
 			this.isGameStarted = true;
 		return resp;
 	}

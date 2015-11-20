@@ -2,6 +2,7 @@ package lambdakifejezes.Map;
 
 import java.util.List;
 
+import eu.loxon.centralcontrol.ObjectType;
 import eu.loxon.centralcontrol.Scouting;
 import eu.loxon.centralcontrol.WsCoordinate;
 
@@ -28,6 +29,7 @@ public class Map {
 	public void setHqExitLocation(WsCoordinate location)
 	{
 		hqExitLocation = location;
+		//map[location.getX() - 1][location.getY() - 1] = new Cell(ObjectType.ROCK, "");
 	}
 	public WsCoordinate getHqExitLocation()
 	{
@@ -58,5 +60,22 @@ public class Map {
 				map[s.getCord().getX()][s.getCord().getY()].setTeam(s.getTeam());
 			}
 		}
+	}
+	
+	public void PrintMap()
+	{
+		System.out.println("Current map is:");
+		for(int y = 0; y < sizeY; y++)
+		{
+			for(int x = 0; x < sizeX; x++)
+			{
+				if (map[x][y] == null)
+					System.out.print(" ");
+				else
+					System.out.print(map[x][y]);
+			}
+			System.out.println();
+		}
+		
 	}
 }

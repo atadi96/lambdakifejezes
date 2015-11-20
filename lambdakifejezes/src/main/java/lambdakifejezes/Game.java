@@ -74,14 +74,19 @@ public class Game implements IsMyTurnListener {
 		
 		for(WsBuilderunit unit : response.getUnits())
 			builderunits.add(new BuilderUnit(unit));
+
+		map.setHqLocation(connectionManager.getSpaceShuttlePos(null).getCord());
+		map.setHqExitLocation(connectionManager.getSpaceShuttleExitPos(null).getCord());
 	}
 	
+	public List<IsMyTurnResponse> responses = new ArrayList<IsMyTurnResponse>();
 
 	@Override
 	public void onOurTurnStarted(IsMyTurnResponse response, Date time) {
 		//TODO onOurTurnStarted
-		System.out.println("Remaining turns: " + response.getResult().getTurnsLeft() + "; Our turn started at: " + dateFormat.format(new Date()));
-		//Date startintTime = sender.getLastMyTurnStartingTime(); //to make sure that you cannot send order to the server after 2,5 sec
+		
+		System.out.println("Remaining turns: " + response.getResult().getTurnsLeft() + "; builderUnit: " + response.getResult().getBuilderUnit() +  "; Our turn started at: " + dateFormat.format(time));
+		
 	}
 
 	@Override
