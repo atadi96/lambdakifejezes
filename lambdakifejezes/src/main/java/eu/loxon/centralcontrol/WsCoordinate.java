@@ -32,6 +32,12 @@ import javax.xml.bind.annotation.XmlType;
     "y"
 })
 public class WsCoordinate {
+	
+	public WsCoordinate(){}
+	public WsCoordinate(int x, int y){
+		setX(x);
+		setY(y);
+	}
 
     protected int x;
     protected int y;
