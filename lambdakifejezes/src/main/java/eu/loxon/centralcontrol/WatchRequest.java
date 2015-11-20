@@ -32,6 +32,11 @@ import javax.xml.bind.annotation.XmlType;
 })
 @XmlRootElement(name = "watchRequest")
 public class WatchRequest {
+	public WatchRequest(){}
+	public WatchRequest(int unitId)
+	{
+		setUnit(unitId);
+	}
 
     protected int unit;
 
