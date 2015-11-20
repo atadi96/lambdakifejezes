@@ -20,6 +20,7 @@ public class Map {
 	public void setHqLocation(WsCoordinate location)
 	{
 		hqLocation = location;
+		map[location.getX() - 1][location.getY() - 1] = new Cell(ObjectType.SHUTTLE, null);
 	}
 	public WsCoordinate getHqLocation()
 	{
@@ -29,7 +30,7 @@ public class Map {
 	public void setHqExitLocation(WsCoordinate location)
 	{
 		hqExitLocation = location;
-		//map[location.getX() - 1][location.getY() - 1] = new Cell(ObjectType.ROCK, "");
+		map[location.getX() - 1][location.getY() - 1] = new Cell(ObjectType.ROCK, null);
 	}
 	public WsCoordinate getHqExitLocation()
 	{
@@ -37,13 +38,14 @@ public class Map {
 	}
 	
 	//starting from zero
-	public Cell getMapField(int xIndex, int yIndex) throws Exception
+	public Cell getMapCell(int xIndex, int yIndex)
 	{
-		if (xIndex < 0 || xIndex >= sizeX)
-			throw new Exception("xIndex parameter is out of range.");
-		if (yIndex < 0 || yIndex >= sizeY)
-			throw new Exception("yIndex parameter is out of range.");
 		return map[xIndex][yIndex];
+	}
+	
+	public boolean existCell(int xIndex, int yIndex)
+	{
+		return xIndex >=0 && xIndex < sizeX && yIndex >=0 && yIndex < sizeY;
 	}
 	
 	public void UpdateMap(List<Scouting> multiScouting)
